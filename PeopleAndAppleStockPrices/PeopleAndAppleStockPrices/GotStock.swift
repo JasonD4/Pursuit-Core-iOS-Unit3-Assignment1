@@ -9,6 +9,7 @@
 import Foundation
 
 
+
 struct Stocks: Codable{
     let date: String
     let open: Double

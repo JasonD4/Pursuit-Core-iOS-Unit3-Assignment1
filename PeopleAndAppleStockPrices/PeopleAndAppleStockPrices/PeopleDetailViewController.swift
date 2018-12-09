@@ -25,6 +25,12 @@ class PeopleDetailViewController: UIViewController {
     }
     
     func updateTheUi(){
+        nameOfPerson.text = person!.location.city.capitalized + ", " + person!.location.state.capitalized + ", " + person!.location.postcode
+        locationOfPerson.text = person!.name.first.capitalized + " " + person!.name.last.capitalized
+        emails.text = person!.email
+        
+        
+        
         
         do{
             let peopleImageData = try Data(contentsOf: person!.picture.large)
@@ -36,3 +42,4 @@ class PeopleDetailViewController: UIViewController {
     }
 
 }
+
