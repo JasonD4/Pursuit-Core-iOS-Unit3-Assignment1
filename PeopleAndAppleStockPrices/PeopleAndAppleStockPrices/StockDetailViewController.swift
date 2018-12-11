@@ -29,15 +29,15 @@ class StockDetailViewController: UIViewController {
         dateofStockView.text = stock?.date
         stockOpening.text = "Opening Price \(String(format: "%.2f", stock!.open))"
         stockClosing.text = "Closing Price\(String(format: "%.2f", stock!.close))"
-        if stock!.change > 0.0{
+        if stock!.open < stock!.close{
             pictureOfResult.image = UIImage.init(named: "thumbsUp")
            view.backgroundColor = .green
         }
-        else if stock!.change < 0.0{
+        else if stock!.open > stock!.close{
             pictureOfResult.image = UIImage.init(named: "thumbsDown")
             view.backgroundColor = .red
         }
-        else if stock!.change == 0.0{
+        else if stock!.open == stock!.close{
             pictureOfResult.image = UIImage.init(named: "meh")
             view.backgroundColor = .gray
         }

@@ -17,7 +17,7 @@ final class GettingPeople{
             if let people = try? Data.init(contentsOf: myURL){
                 do{
                     let allPeople = try JSONDecoder().decode(AllThePeople.self, from: people)
-                    users = allPeople.results
+                    users = allPeople.results.sorted{$0.name.first < $1.name.first}
                 }catch{
                     print("error is: \(error)")
                 }

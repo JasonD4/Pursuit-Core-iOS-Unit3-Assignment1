@@ -15,14 +15,15 @@ class PeopleViewController: UIViewController {
     
     var people = [User](){
         didSet{
-            peopleTableView.reloadData()
+            self.peopleTableView.reloadData()
         }
     }
   override func viewDidLoad() {
     super.viewDidLoad()
-    people = GettingPeople.update()
     peopleTableView.dataSource = self
     peopleSearchBar.delegate = self
+    people = GettingPeople.update()
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,7 +49,7 @@ extension PeopleViewController: UITableViewDataSource{
         
         let peopleAtCell = people[indexPath.row]
         
-        cell.textLabel?.text =  peopleAtCell.name.first.capitalized + " " + peopleAtCell.name.last.capitalized
+        cell.textLabel?.text = peopleAtCell.name.first.capitalized + " " + peopleAtCell.name.last.capitalized
         cell.detailTextLabel?.text = peopleAtCell.location.state.capitalized
         
         DispatchQueue.global().async {
@@ -69,8 +70,16 @@ extension PeopleViewController: UITableViewDataSource{
 }
 
 extension PeopleViewController: UISearchBarDelegate{
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let text = searchBar.text else{return}
-    people.filter(){return ($0.name.first).lowercased().contains(text.lowercased())}
+      
+        if text != ""{
+            people = GettingPeople.update()
+               people = people.filter(){$0.name.first.capitalized.contains(text.capitalized) || $0.name.last.capitalized.contains(text.capitalized)}
+        }
+        else {
+            people = GettingPeople.update()
+
+        }
     }
 }
