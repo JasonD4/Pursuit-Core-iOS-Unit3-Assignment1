@@ -13,9 +13,8 @@ class StockViewController: UIViewController {
     @IBOutlet weak var stockTableView: UITableView!
     
     var stockMarket = [[Stocks]]()
-    //    var stockSection = [[Stocks]]()
     
-    //var y = 2016
+    public let months = [1:"January", 2:"February", 3:"March", 4:"April", 5:"May", 6:"June", 7:"July", 8:"August", 9:"September", 10: "October", 11: "November", 12: "December" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,37 +62,12 @@ extension StockViewController: UITableViewDataSource{
     
 }
 
-
 extension StockViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "December"
-        case 1:
-            return "January"
-        case 2:
-            return "Febuary"
-        case 3:
-            return "March"
-        case 4:
-            return "April"
-        case 5:
-            return "May"
-        case 6:
-            return "June"
-        case 7:
-            return "July"
-        case 8:
-            return "August"
-        case 9:
-            return "September"
-        case 10:
-            return "October"
-        case 11:
-            return "November"
-            
-        default:
-            return "bad"
-        }
+      let monthDate = GettingStocks.getMonthYear(dateString:(stockMarket[section].first?.date)!) // 2016-12-01 => December-2016
+        var avg = stockMarket[section].reduce(0){($0 + $1.open)}
+        avg = avg / Double(stockMarket[section].count)
+        guard let number = Int(monthDate.month) else{return "error"}
+        return "\(months[Int(number)] ?? "nil"), \(monthDate.year)     Avg for the Month \(String(format:"%.2f",avg))"
     }
 }

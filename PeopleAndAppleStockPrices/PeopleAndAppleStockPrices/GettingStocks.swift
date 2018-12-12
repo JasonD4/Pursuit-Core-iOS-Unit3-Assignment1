@@ -10,7 +10,7 @@ import Foundation
 
 
 final class GettingStocks{
-    
+    public var avg = Double()
     
     private static func updateingStock() -> [Stocks] {
         var currentStock = [Stocks]()
@@ -34,9 +34,7 @@ final class GettingStocks{
     }
     
     public static func stockSections()  -> [[Stocks]]{
-        // 1. get all stocks (once)
         let allPrices = updateingStock()
-        // 2. create an 2d array of Stocks [[Stocks]]()
         var stockPriceSections = [[Stocks]]()
         
         stockPriceSections.append([Stocks]())

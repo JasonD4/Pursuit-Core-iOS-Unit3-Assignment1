@@ -77,9 +77,9 @@ extension PeopleViewController: UISearchBarDelegate{
             people = GettingPeople.update()
                people = people.filter(){$0.name.first.capitalized.contains(text.capitalized) || $0.name.last.capitalized.contains(text.capitalized)}
         }
-        else {
+        else{
             people = GettingPeople.update()
-
         }
+
     }
 }
